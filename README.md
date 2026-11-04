@@ -1,4 +1,10 @@
-# RecordNote
+# RecordNote for Obsidian
+
+Turn voice recordings into searchable transcripts, summaries, action items, and Markdown notes with configurable AI services. RecordNote works with recordings captured by Obsidian Quick Capture on iPhone and audio files available in your vault.
+
+**项目地址 / Repository:** [github.com/0xcjl/RecordNote](https://github.com/0xcjl/RecordNote)
+
+**Author:** Jialin · **Email:** [0xjialin@gmail.com](mailto:0xjialin@gmail.com) · **X:** [@0xjialin](https://x.com/0xjialin)
 
 RecordNote 是一个 Obsidian 第三方插件，用于将录音转写为 Markdown，并生成摘要、待办和建议。项目处于早期测试阶段。
 
@@ -43,10 +49,12 @@ Siri 和 Spotlight 也可用于打开 Quick Capture；可在 Quick Capture 的�
 
 ## 数据与限制
 
-原始录音保留在原位置；处理结果和进度保存在仓库的 `语音整理` 文件夹。处理时录音会发送给所选转写服务，转写文字会发送给所选文字整理服务。关闭 Obsidian Sync 的音频同步需要在每台设备的同步设置中配置；插件本身不会关闭同步，其他同步服务也需要单独检查。同步设置变更不会自动删除此前已上传的音频。
+原始录音保留在原位置；处理结果和进度保存在仓库的 `语音整理` 文件夹。手动选择录音时可读取用户在文件选择器中指定的仓库外音频；在支持的 Mac 环境中，导出功能可将用户选定的 Markdown 保存到仓库外位置。处理时录音会发送给所选转写服务，转写文字会发送给所选文字整理服务。关闭 Obsidian Sync 的音频同步需要在每台设备的同步设置中配置；插件本身不会关闭同步，其他同步服务也需要单独检查。同步设置变更不会自动删除此前已上传的音频。
 
 长音频会先在设备内解码，文件超过 100 MB 会被拒绝；长录音的内存消耗、后台执行和恢复能力受设备及系统限制。输出可能包含识别或总结错误，请核对重要信息。最新版本对直接打开音频文件的处理入口有本地自动化测试，但尚未完成该修复的 iPhone 真机验收。
 
-## 许可
+## 联系与许可
 
-目前未指定开源许可证；代码公开可查看，但使用、修改和再分发权限需以适用法律及作者授权为准。
+作者：Jialin。问题反馈可通过 [GitHub Issues](https://github.com/0xcjl/RecordNote/issues) 或 [邮件](mailto:0xjialin@gmail.com) 联系；也可访问 [X @0xjialin](https://x.com/0xjialin)。
+
+本项目采用 [MIT License](LICENSE)。
