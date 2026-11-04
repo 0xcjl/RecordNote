@@ -33,7 +33,7 @@ Obsidian 的 Quick Capture 负责录音；RecordNote 负责后续处理。在 iP
 
 ## 手动安装
 
-本项目尚未发布到 Obsidian 社区插件市场。下载 `main.js`、`manifest.json` 和 `styles.css`，放入仓库的 `.obsidian/plugins/voice-organizer-local/` 文件夹，重启 Obsidian 后在第三方插件设置中启用 RecordNote。最低 Obsidian 版本见 `manifest.json`。在移动设备上可通过支持插件同步的方式传递这些插件文件，再按提示重启。
+RecordNote 的 [社区目录条目](https://community.obsidian.md/plugins/voice-organizer-local)已公开，能否直接安装取决于审核状态。也可手动安装：下载 `main.js`、`manifest.json` 和 `styles.css`，放入仓库的 `.obsidian/plugins/voice-organizer-local/` 文件夹，重启 Obsidian 后在第三方插件设置中启用 RecordNote。最低 Obsidian 版本见 `manifest.json`。在移动设备上可通过支持插件同步的方式传递这些插件文件，再按提示重启。
 
 ## iPhone 快速录音：应用案例
 
