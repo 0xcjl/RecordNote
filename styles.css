@@ -1,0 +1,8 @@
+.voice-organizer-export-section { padding: 16px 0; border-bottom: 1px solid var(--background-modifier-border); }
+.voice-organizer-export-section:last-child { border-bottom: 0; }
+.voice-organizer-export-section h3 { margin: 0 0 8px; }
+.voice-organizer-export-filename { margin: 0 0 12px; font-size: var(--font-smallest); color: var(--text-muted); overflow-wrap: anywhere; }
+.voice-organizer-export-actions { display: flex; gap: 12px; }
+.voice-organizer-export-actions button { flex: 1; min-width: 0; min-height: 44px; font-weight: 600; white-space: normal; }
+.voice-organizer-export-actions .voice-organizer-export-save { border: 1px solid var(--interactive-accent); color: var(--text-normal); background: var(--background-primary); box-shadow: none; }
+.voice-organizer-choices button { display: block; width: 100%; height: auto; min-height: 44px; white-space: normal; overflow-wrap: anywhere; text-align: left; margin-bottom: 8px; }

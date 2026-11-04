@@ -1,0 +1,9 @@
+{
+  "id": "voice-organizer-local",
+  "name": "RecordNote",
+  "version": "0.2.32",
+  "minAppVersion": "1.15.0",
+  "description": "转写和整理 Obsidian 录音",
+  "author": "0xcjl",
+  "isDesktopOnly": false
+}
