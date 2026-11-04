@@ -21,6 +21,16 @@ Obsidian 的 Quick Capture 负责录音；RecordNote 负责后续处理。在 iP
 - 提供任务状态、重新整理以及 Markdown 导出 / 分享入口。文件分享功能取决于设备和系统支持。
 - 支持 MiniMax、OpenAI 和兼容 OpenAI 音频转写接口的自定义服务；文字整理可配置 MiniMax、OpenAI、Gemini、Grok、DeepSeek、Claude 或兼容接口。实际可用性取决于服务商接口、模型和账号权限。
 
+## 命令与入口
+
+在 Obsidian 命令面板搜索以下命令，或将常用命令加入移动端菜单：
+
+- **处理当前语音笔记**：处理当前笔记中嵌入的录音；如果笔记有多段录音，可选择其中一段。也可从侧边栏图标调用。
+- **选择录音并转写整理**：从文件选择器选择其他录音，例如语音备忘录导出的音频。
+- **查看语音处理状态**：查看任务进度、错误和继续处理入口。
+- **仅重新整理当前转写（保留旧稿）**：基于已有转写重新生成整理稿。
+- **导出 / 分享当前语音笔记的 Markdown**：选择转写稿、总结稿或合并稿，按设备支持情况分享或保存副本。
+
 ## 手动安装
 
 本项目尚未发布到 Obsidian 社区插件市场。下载 `main.js`、`manifest.json` 和 `styles.css`，放入仓库的 `.obsidian/plugins/voice-organizer-local/` 文件夹，重启 Obsidian 后在第三方插件设置中启用 RecordNote。最低 Obsidian 版本见 `manifest.json`。在移动设备上可通过支持插件同步的方式传递这些插件文件，再按提示重启。
