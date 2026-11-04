@@ -49,9 +49,13 @@ The settings connection test sends fixed sample text to the text provider and ma
 
 ### Data and limitations
 
-Recordings remain at their original locations; results and progress are stored in the vault's `语音整理` folder. The file picker can read an audio file that you select outside the vault; on supported Mac environments, the export dialog can save Markdown outside the vault. Audio is sent to the selected transcription provider and transcript text to the selected text provider. API access may incur charges.
+Recordings remain at their original locations. Results and progress use the vault's `RecordNote` folder for new installations. Existing installations continue using `语音整理` until migrated; existing data remains accessible. The file picker can read an audio file that you select outside the vault; on supported Mac environments, the export dialog can save Markdown outside the vault. Audio is sent to the selected transcription provider and transcript text to the selected text provider. API access may incur charges.
 
 To keep audio out of Obsidian Sync, disable audio synchronization on each device. The plugin does not change synchronization settings or delete previously uploaded recordings. Check other sync services separately. Audio is decoded in device memory; files larger than 100 MB are rejected. Long recordings, background execution, and recovery are subject to device limits. Review output for transcription and AI errors. The latest open-audio-file fix and real long recordings still need iPhone acceptance testing.
+
+### Migrating an existing folder
+
+If an older version created a `语音整理` folder, back up the entire vault, including device-only audio and progress files, before running **迁移语音整理文件夹到 RecordNote** on the mobile device that holds the original recordings. Enable Obsidian’s **Automatically update internal links** first. The command refuses an existing `RecordNote` destination, checks file hashes and indexed links, and leaves a migration audit containing file paths and hashes in the plugin folder. If verification reports an error after the folder has moved, keep the files and backup and inspect the audit before trying recovery. Do not run competing sync or editing during migration. Excluded audio and other files remain device-local.
 
 ### Contact and license
 
@@ -110,9 +114,17 @@ Siri 和 Spotlight 也可用于打开 Quick Capture；可在 Quick Capture 的�
 
 ## 数据与限制
 
-原始录音保留在原位置；处理结果和进度保存在仓库的 `语音整理` 文件夹。手动选择录音时可读取用户在文件选择器中指定的仓库外音频；在支持的 Mac 环境中，导出功能可将用户选定的 Markdown 保存到仓库外位置。处理时录音会发送给所选转写服务，转写文字会发送给所选文字整理服务。关闭 Obsidian Sync 的音频同步需要在每台设备的同步设置中配置；插件本身不会关闭同步，其他同步服务也需要单独检查。同步设置变更不会自动删除此前已上传的音频。
+原始录音保留在原位置；新安装时，处理结果和进度保存在仓库的 `RecordNote` 文件夹。已有旧版文件夹时，在迁移前会继续使用 `语音整理`，已有数据仍可访问。手动选择录音时可读取用户在文件选择器中指定的仓库外音频；在支持的 Mac 环境中，导出功能可将用户选定的 Markdown 保存到仓库外位置。处理时录音会发送给所选转写服务，转写文字会发送给所选文字整理服务。关闭 Obsidian Sync 的音频同步需要在每台设备的同步设置中配置；插件本身不会关闭同步，其他同步服务也需要单独检查。同步设置变更不会自动删除此前已上传的音频。
 
 长音频会先在设备内解码，文件超过 100 MB 会被拒绝；长录音的内存消耗、后台执行和恢复能力受设备及系统限制。输出可能包含识别或总结错误，请核对重要信息。最新版本对直接打开音频文件的处理入口有本地自动化测试，但尚未完成该修复的 iPhone 真机验收。
+
+## 旧文件夹迁移
+
+旧版如果已有 `语音整理` 文件夹，请先备份整个仓库，包括只存在于手机上的录音和进度文件，并开启 Obsidian 的“始终更新内部链接”。在保存原录音的移动设备上运行“迁移语音整理文件夹到 RecordNote”。插件会在目标文件夹已存在时停止，并核对文件哈希和已索引链接；插件目录中会保留包含路径和哈希的迁移核对记录。如果文件已移动但核对报错，请保留现有文件及备份，检查记录后再处理。迁移期间避免其他设备同时编辑或同步；同步排除的音频等文件仍仅保存在本机。
+
+## 验证
+
+运行 `node --test audio-chunks.test.mjs missing-audio.test.cjs plugin.test.cjs settings.test.cjs migration.test.cjs` 执行本地测试。
 
 ## 联系与许可
 
