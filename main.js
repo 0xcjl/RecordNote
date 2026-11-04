@@ -60,7 +60,7 @@ function resultName(summary, date=Date.now()) {
 }
 class VoiceSettings extends PluginSettingTab {
   constructor(app,plugin){ super(app,plugin); this.plugin=plugin; }
-  display(){const e=this.containerEl; e.empty(); e.createEl('h2',{text:'语音整理'});let connectionStatus,revision=0;const invalidate=()=>{revision++;connectionStatus?.setText('文字服务连接：配置已更改，请重新测试');};
+  display(){const e=this.containerEl; e.empty(); e.createEl('h2',{text:'RecordNote'});let connectionStatus,revision=0;const invalidate=()=>{revision++;connectionStatus?.setText('文字服务连接：配置已更改，请重新测试');};
     new Setting(e).setName('MiniMax 密钥').setDesc('在 Obsidian 密钥库选择或创建，不会写入笔记。').addComponent(el=>new SecretComponent(this.app,el).setValue(this.plugin.settings.secret).onChange(async v=>{invalidate();this.plugin.settings.secret=v;await this.plugin.saveData(this.plugin.settings);}));
     new Setting(e).setName('文字模型').addText(t=>t.setValue(this.plugin.settings.model).onChange(async v=>{invalidate();this.plugin.settings.model=v.trim();await this.plugin.saveData(this.plugin.settings);}));
     new Setting(e).setName('API 区域').setDesc('选择密钥所属区域；国内站和国际站账号不可混用。').addDropdown(d=>d.addOption('','请选择区域').addOption('https://api.minimaxi.com','国内站').addOption('https://api.minimax.io','国际站').setValue(this.plugin.settings.base==='https://api.minimax.cn'?'https://api.minimaxi.com':['https://api.minimaxi.com','https://api.minimax.io'].includes(this.plugin.settings.base)?this.plugin.settings.base:'').onChange(async v=>{if(!v)return;invalidate();this.plugin.settings.base=v;await this.plugin.saveData(this.plugin.settings);}));

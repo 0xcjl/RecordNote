@@ -1,7 +1,7 @@
 {
   "id": "voice-organizer-local",
   "name": "RecordNote",
-  "version": "0.2.32",
+  "version": "0.2.33",
   "minAppVersion": "1.15.0",
   "description": "Transcribe audio recordings and organize them into summaries, action items, and Markdown notes with AI.",
   "author": "Jialin",
