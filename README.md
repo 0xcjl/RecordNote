@@ -8,6 +8,57 @@ Turn voice recordings into searchable transcripts, summaries, action items, and 
 
 RecordNote 是一个 Obsidian 第三方插件，用于将录音转写为 Markdown，并生成摘要、待办和建议。项目处于早期测试阶段。
 
+## English
+
+### Features and workflow
+
+**Capture a recording → open its note → transcribe and organize → review or share Markdown.**
+
+RecordNote turns audio into timestamped transcripts and separate AI summaries with key points, decisions, action items, and suggestions. It adds links to results in the source note, keeps original audio, processes audio in segments, and saves progress to support retries. You can reorganize an existing transcript while keeping earlier summaries. Markdown export offers the transcript, summary, or a combined file; available sharing and save options depend on the device.
+
+Obsidian Quick Capture handles recording on iPhone. RecordNote processes the saved audio afterward. You can also choose an audio file manually, including an exported voice memo. On Mac, use the same note processing workflow for audio available on that device.
+
+### Commands
+
+- **处理当前语音笔记** — Process the recording embedded in the current note, or choose one when it contains several. A ribbon button is also available.
+- **选择录音并转写整理** — Select another audio file for transcription and organization.
+- **查看语音处理状态** — View progress, errors, and retry options.
+- **仅重新整理当前转写（保留旧稿）** — Generate a new summary from an existing transcript without replacing the old one.
+- **导出 / 分享当前语音笔记的 Markdown** — Share or save a transcript, summary, or combined Markdown copy.
+
+### Installation
+
+The [community listing](https://community.obsidian.md/plugins/voice-organizer-local) is public; installation from Obsidian depends on the review status. For manual installation, download `main.js`, `manifest.json`, and `styles.css` from the [GitHub release](https://github.com/0xcjl/RecordNote/releases), place them in `.obsidian/plugins/voice-organizer-local/` within your vault, restart Obsidian, and enable RecordNote under Community plugins. The minimum Obsidian version is specified in `manifest.json`. Mobile installation may also use a supported plugin synchronization method.
+
+### iPhone Quick Capture example
+
+This workflow builds on [A-Lin's Quick Capture post](https://x.com/alin_zone/status/2117444969552396431) and the [official iOS guide](https://obsidian.md/help/ios). iPhone voice capture requires Obsidian 1.15 or later and iOS 26 or later.
+
+1. Add an Obsidian Quick Capture widget to the Home Screen. Press and hold it to edit its vault and action; Lock Screen and Control Center entries are also available.
+2. Open voice capture and enable **Save Audio File** in its settings. This is required for RecordNote to access the recording and is off by default starting with Obsidian 1.15.1. Set the microphone and language as needed.
+3. Start recording, including from a configured widget. Recording can continue while the device is locked. Stop and save, then confirm that the created note contains an audio attachment.
+4. Open the note and run **处理当前语音笔记**. Follow the result links and export or share as needed.
+
+Siri and Spotlight can also open Quick Capture. Automatic note titles are available in its capture settings. Labels vary with language and version; widgets are unavailable when Obsidian's Require Face ID option is enabled.
+
+### AI settings
+
+Transcription and text organization can use separate providers and API keys. Transcription supports MiniMax, OpenAI, or a custom OpenAI-compatible audio transcription endpoint. Text organization supports MiniMax, OpenAI, Gemini, Grok, DeepSeek, Claude, or a custom OpenAI-compatible Chat Completions endpoint. Enter the appropriate model ID, choose the correct MiniMax region if applicable, and select keys through Obsidian's secret storage. Custom endpoints require HTTPS. Service capabilities, account access, and pricing vary.
+
+The settings connection test sends fixed sample text to the text provider and may incur a charge; it does not test transcription. Consumer subscription login and local Agent integration are not implemented.
+
+### Data and limitations
+
+Recordings remain at their original locations; results and progress are stored in the vault's `语音整理` folder. The file picker can read an audio file that you select outside the vault; on supported Mac environments, the export dialog can save Markdown outside the vault. Audio is sent to the selected transcription provider and transcript text to the selected text provider. API access may incur charges.
+
+To keep audio out of Obsidian Sync, disable audio synchronization on each device. The plugin does not change synchronization settings or delete previously uploaded recordings. Check other sync services separately. Audio is decoded in device memory; files larger than 100 MB are rejected. Long recordings, background execution, and recovery are subject to device limits. Review output for transcription and AI errors. The latest open-audio-file fix and real long recordings still need iPhone acceptance testing.
+
+### Contact and license
+
+Author: Jialin · Email: [0xjialin@gmail.com](mailto:0xjialin@gmail.com) · X: [@0xjialin](https://x.com/0xjialin) · [GitHub Issues](https://github.com/0xcjl/RecordNote/issues). Licensed under the [MIT License](LICENSE).
+
+## 中文
+
 ## 工作流程与特点
 
 **快速录音 → 打开录音笔记 → 一键转写和整理 → 查看、分享 Markdown。**
