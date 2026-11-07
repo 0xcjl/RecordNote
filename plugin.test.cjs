@@ -156,3 +156,35 @@ test('mobile MiniMax resumes fifteen-second parts without repeating completed au
  const bytes=new Uint8Array([98]),data=new Map(),calls=[];const p=new Plugin();p.settings={base:'https://api.minimaxi.com',secret:'key',model:'test'};p.app={secretStorage:{getSecret:()=> 'key'},vault:{adapter:{exists:async x=>data.has(x),write:async(x,v)=>data.set(x,v),read:async x=>data.get(x)},createFolder:async x=>data.set(x,'folder'),create:async(x,v)=>data.set(x,v)}};p.organizeTranscript=async()=> '总结';p.transcribePiece=async(_a,offset,duration)=>{calls.push([offset,duration]);if(offset===15&&calls.length===2)throw Error('interrupted');return [{start:offset,text:'识别'}]};
  try{const file={name:'test.m4a',arrayBuffer:async()=>bytes.buffer};await p.processFile(file);const progress=[...data.entries()].find(([path])=>path.endsWith('转写进度.json'));assert.deepEqual(JSON.parse(progress[1]).pending,{index:0,completed:1,partSeconds:15});await p.processFile(file);assert.deepEqual(calls,[[0,15],[15,15],[15,15],[30,2]]);assert.equal(JSON.parse(data.get(progress[0])).completed,1);assert.equal([...data.entries()].find(([path])=>path.endsWith('处理状态.json'))&&JSON.parse([...data.entries()].find(([path])=>path.endsWith('处理状态.json'))[1]).stage,'已完成');}finally{mobilePlatform.isMobile=false;global.AudioContext=old;}
 });
+
+test('long text organization checkpoints completed synthetic chunks and resumes after interruption',async()=>{
+ const data=new Map(),seen=[];const plugin=new Plugin();plugin.app={vault:{adapter:{exists:async p=>data.has(p),read:async p=>data.get(p),write:async(p,v)=>data.set(p,v)}}};const input=('合成会议记录，讨论计划与后续任务。'.repeat(1500));let fail=true;
+ global.fetch=async(_url,opt)=>{const body=JSON.parse(opt.body),text=body.messages.at(-1).content;seen.push(text);assert.ok(text.length<=7000,'request should be bounded');if(fail&&seen.length===2)throw Error('synthetic interruption');return {ok:true,status:200,text:async()=>JSON.stringify({choices:[{message:{content:'合成分段摘要和下一步'}}]})}};
+ const config={provider:'minimax',base:'https://api.minimaxi.com',model:'test'};await assert.rejects(plugin.organizeTranscript(input,'dummy',config,'RecordNote/test'),/interruption/);const first=seen[0];fail=false;const result=await plugin.organizeTranscript(input,'dummy',config,'RecordNote/test');assert.ok(result);assert.equal(seen.filter(x=>x===first).length,1,'completed chunk should not be sent twice');assert.ok(seen.length>3);
+});
+
+test('long text progress is preserved and rejected when model changes',async()=>{
+ const data=new Map();let calls=0;const p=new Plugin();p.app={vault:{adapter:{exists:async x=>data.has(x),read:async x=>data.get(x),write:async(x,v)=>data.set(x,v)}}};const input='测试内容。'.repeat(3000);const cfg={provider:'minimax',base:'https://api.minimaxi.com',model:'original'};
+ global.fetch=async()=>{if(++calls===2)throw Error('interrupted');return {ok:true,status:200,text:async()=>JSON.stringify({choices:[{message:{content:'分段摘要'}}]})}};await assert.rejects(p.organizeTranscript(input,'dummy',cfg,'RecordNote/test'),/interrupted/);const before=data.get('RecordNote/test/整理进度.json');await assert.rejects(p.organizeTranscript(input,'dummy',{...cfg,model:'changed'},'RecordNote/test'),/不匹配/);assert.equal(data.get('RecordNote/test/整理进度.json'),before);assert.equal(calls,2);
+});
+
+test('a timed-out text chunk is subdivided and its completed subparts survive retry',async()=>{
+ const data=new Map(),seen=[];const p=new Plugin();p.app={vault:{adapter:{exists:async x=>data.has(x),read:async x=>data.get(x),write:async(x,v)=>data.set(x,v)}}};const input='甲'.repeat(3000)+'乙'.repeat(3000)+'丙'.repeat(3000)+'丁'.repeat(3000)+'戊'.repeat(1000);let interrupt=true;
+ const original=p.organizeTranscript;p.organizeTranscript=async function(t,k,c,d,partial){if(partial){seen.push(t);if(t.length>3000){const e=new Error('timeout');e.code='VOICE_TIMEOUT';throw e;}if(interrupt&&t.length===3000&&seen.filter(x=>x.length===3000).length===2)throw Error('interrupted');return '合成摘要'}return original.call(this,t,k,c,d,partial)};global.fetch=async()=>({ok:true,status:200,text:async()=>JSON.stringify({choices:[{message:{content:'合成摘要'}}]})});
+ const cfg={provider:'minimax',base:'https://api.minimaxi.com',model:'test'};await assert.rejects(p.organizeTranscript(input,'dummy',cfg,'RecordNote/synthetic'),/interrupted/);const before=JSON.parse(data.get('RecordNote/synthetic/整理进度.json'));assert.equal(before.pending.summaries.length,1);interrupt=false;assert.ok(await p.organizeTranscript(input,'dummy',cfg,'RecordNote/synthetic'));assert.equal(seen.filter(x=>x===seen[1]).length,1);
+});
+
+test('final merge identifies the sections as one recording',async()=>{
+ const prompts=[];const p=new Plugin();p.app={vault:{adapter:{exists:async()=>false,write:async()=>{}}}};global.fetch=async(_url,opt)=>{const body=JSON.parse(opt.body);prompts.push(body.messages[0].content);return {ok:true,status:200,text:async()=>JSON.stringify({choices:[{message:{content:'分段结果'}}]})}};
+ await p.organizeTranscript('合成内容'.repeat(2000),'dummy',{provider:'minimax',base:'https://api.minimaxi.com',model:'test'},'RecordNote/test');assert.match(prompts.at(-1),/同一条录音/);assert.match(prompts.at(-1),/不要描述为多条录音/);
+});
+
+test('reorganization uses a separate resumable checkpoint and preserves the existing draft',async()=>{
+ const p=new Plugin(),data=new Map([['RecordNote/test/转写.md','合成文本'],['RecordNote/test/整理.md','原总结']]),seen=[];
+ p.settings={secret:'key',base:'https://api.minimaxi.com',model:'test'};
+ p.app={secretStorage:{getSecret:()=> 'key'},workspace:{getActiveFile:()=>({path:'RecordNote/test/整理.md'}),getLeaf:()=>({openFile:async()=>{}})},vault:{adapter:{exists:async x=>data.has(x),read:async x=>data.get(x)},create:async(x,v)=>{data.set(x,v);return {path:x}}}};
+ p.organizeTranscript=async(...args)=>{seen.push(args);return '新总结'};
+ await p.reorganizeCurrent();
+ assert.equal(seen[0][3],'RecordNote/test');assert.equal(seen[0][6],'重新整理-2进度.json');
+ assert.equal(data.get('RecordNote/test/整理.md'),'原总结');assert.match(data.get('RecordNote/test/整理-2.md'),/新总结/);
+});
