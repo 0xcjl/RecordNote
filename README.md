@@ -28,7 +28,7 @@ Obsidian Quick Capture handles recording on iPhone. RecordNote processes the sav
 
 ### Installation
 
-The [community listing](https://community.obsidian.md/plugins/voice-organizer-local) is public; installation from Obsidian depends on the review status. For manual installation, download `main.js`, `manifest.json`, and `styles.css` from the [GitHub release](https://github.com/0xcjl/RecordNote/releases), place them in `.obsidian/plugins/voice-organizer-local/` within your vault, restart Obsidian, and enable RecordNote under Community plugins. The minimum Obsidian version is specified in `manifest.json`. Mobile installation may also use a supported plugin synchronization method.
+The community directory submission for the `recordnote` ID is subject to review. For manual installation, download `main.js`, `manifest.json`, and `styles.css` from the [GitHub release](https://github.com/0xcjl/RecordNote/releases), place them in `.obsidian/plugins/recordnote/` within your vault, restart Obsidian, and enable RecordNote under Community plugins. If upgrading from `voice-organizer-local`, keep the old plugin files until you have verified that settings and recordings are available in RecordNote; disable the old plugin before enabling the new one. The minimum Obsidian version is specified in `manifest.json`. Mobile installation may also use a supported plugin synchronization method.
 
 ### iPhone Quick Capture example
 
@@ -88,7 +88,7 @@ Obsidian 的 Quick Capture 负责录音；RecordNote 负责后续处理。在 iP
 
 ## 手动安装
 
-RecordNote 的 [社区目录条目](https://community.obsidian.md/plugins/voice-organizer-local)已公开，能否直接安装取决于审核状态。也可手动安装：下载 `main.js`、`manifest.json` 和 `styles.css`，放入仓库的 `.obsidian/plugins/voice-organizer-local/` 文件夹，重启 Obsidian 后在第三方插件设置中启用 RecordNote。最低 Obsidian 版本见 `manifest.json`。在移动设备上可通过支持插件同步的方式传递这些插件文件，再按提示重启。
+RecordNote 的 `recordnote` ID 在社区目录的提交需要审核。也可手动安装：下载 `main.js`、`manifest.json` 和 `styles.css`，放入仓库的 `.obsidian/plugins/recordnote/` 文件夹，重启 Obsidian 后在第三方插件设置中启用 RecordNote。从 `voice-organizer-local` 升级时，先停用旧插件，并保留旧插件文件，直到确认新插件的设置和录音均可正常使用。最低 Obsidian 版本见 `manifest.json`。在移动设备上可通过支持插件同步的方式传递这些插件文件，再按提示重启。
 
 ## iPhone 快速录音：应用案例
 
