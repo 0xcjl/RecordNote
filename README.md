@@ -22,7 +22,7 @@ RecordNote 是一个 Obsidian 第三方插件，用于将录音转写为 Markdow
 
 RecordNote turns audio into timestamped transcripts and separate AI summaries with key points, decisions, action items, and suggestions. It adds links to results in the source note, keeps original audio, processes audio in segments, and saves progress to support retries. You can reorganize an existing transcript while keeping earlier summaries. Markdown export offers the transcript, summary, or a combined file; available sharing and save options depend on the device.
 
-Obsidian Quick Capture handles recording on iPhone. RecordNote processes the saved audio afterward. You can also choose an audio file manually, including an exported voice memo. On Mac, use the same note processing workflow for audio available on that device.
+Obsidian Quick Capture handles recording on iPhone. RecordNote uses meaningful Quick Capture text when available, even if no audio file was saved; otherwise it processes available audio. You can also choose an audio file manually, including an exported voice memo. On Mac, use the same note processing workflow for audio available on that device.
 
 ### Commands
 
@@ -41,8 +41,8 @@ Find RecordNote in Obsidian Community Plugins. For manual installation, download
 This workflow builds on [A-Lin's Quick Capture post](https://x.com/alin_zone/status/2117444969552396431) and the [official iOS guide](https://obsidian.md/help/ios). iPhone voice capture requires Obsidian 1.15 or later and iOS 26 or later.
 
 1. Add an Obsidian Quick Capture widget to the Home Screen. Press and hold it to edit its vault and action; Lock Screen and Control Center entries are also available.
-2. Open voice capture and enable **Save Audio File** in its settings. This is required for RecordNote to access the recording and is off by default starting with Obsidian 1.15.1. Set the microphone and language as needed.
-3. Start recording, including from a configured widget. Recording can continue while the device is locked. Stop and save, then confirm that the created note contains an audio attachment.
+2. Open voice capture and enable **Save Audio File** in its settings. Enable this to retain and process the audio; it is off by default starting with Obsidian 1.15.1. RecordNote can also organize text-only Quick Capture notes with their automatic timestamp titles. Set the microphone and language as needed.
+3. Start recording, including from a configured widget. Recording can continue while the device is locked. Stop and save, then confirm that the created note contains the recognized text or an audio attachment.
 4. Open the note and run **处理当前语音笔记**. Follow the result links and export or share as needed.
 
 Siri and Spotlight can also open Quick Capture. Automatic note titles are available in its capture settings. Labels vary with language and version; widgets are unavailable when Obsidian's Require Face ID option is enabled.
@@ -102,8 +102,8 @@ Obsidian 的 Quick Capture 负责录音；RecordNote 负责后续处理。在 iP
 
 1. 使用 iOS 26 或更新版本，将 iPhone 上的 Obsidian 更新到 1.15 或更新版本。
 2. 在主屏幕长按空白处进入编辑，添加 Obsidian 的 Quick Capture（快速记录）小组件。长按小组件并选择编辑，可配置仓库和语音录入操作；也可使用锁屏或控制中心的 Quick Capture 入口。
-3. 打开 Quick Capture，进入语音录入，在齿轮设置中开启 **Save Audio File（保存音频文件）**。这是 RecordNote 读取录音所必需的：Obsidian 1.15.1 起该选项默认关闭。可同时选择识别语言和麦克风。
-4. 点小组件的语音入口开始录音；也可以进入快速记录后点击麦克风。录音期间可以锁屏，结束后停止并保存。确认生成的笔记中包含音频附件。
+3. 打开 Quick Capture，进入语音录入，在齿轮设置中开启 **Save Audio File（保存音频文件）**。如果希望保留和处理音频，请启用此项；Obsidian 1.15.1 起该选项默认关闭。只有文字时，RecordNote 也可整理符合快速记录命名格式的笔记。可同时选择识别语言和麦克风。
+4. 点小组件的语音入口开始录音；也可以进入快速记录后点击麦克风。录音期间可以锁屏，结束后停止并保存。确认生成的笔记中包含识别文字或音频附件。
 5. 打开这条笔记，在 Obsidian 命令或菜单中选择 **处理当前语音笔记**。处理完成后，通过笔记中的链接查看转写和总结，再按需导出或分享。
 
 Siri 和 Spotlight 也可用于打开 Quick Capture；可在 Quick Capture 的捕获位置设置中把笔记标题设为自动。具体入口名称可能随系统语言和 Obsidian 版本变化。小组件在 Obsidian 开启“需要 Face ID”时不可用，详见官方说明。
