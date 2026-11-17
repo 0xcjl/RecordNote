@@ -1,5 +1,11 @@
 # RecordNote for Obsidian
 
+> **Obsidian 插件市场 / Community Plugins:** [RecordNote 插件页面](https://community.obsidian.md/plugins/recordnote) · [在 Obsidian 中打开 / Open in Obsidian](obsidian://show-plugin?id=recordnote)
+>
+> 在 Obsidian 的「设置 → 第三方插件 → 浏览」中搜索 **RecordNote**，安装后启用。iPhone 和 Mac 均可使用；录音转写与整理需配置相应的 AI 服务。
+>
+> In Obsidian, open **Settings → Community plugins → Browse**, search for **RecordNote**, install it, and enable it. Available on iPhone and Mac; configure AI services for transcription and organization.
+
 Turn voice recordings into searchable transcripts, summaries, action items, and Markdown notes with configurable AI services. RecordNote works with recordings captured by Obsidian Quick Capture on iPhone and audio files available in your vault.
 
 **项目地址 / Repository:** [github.com/0xcjl/RecordNote](https://github.com/0xcjl/RecordNote)
@@ -28,7 +34,7 @@ Obsidian Quick Capture handles recording on iPhone. RecordNote processes the sav
 
 ### Installation
 
-The community directory submission for the `recordnote` ID is subject to review. For manual installation, download `main.js`, `manifest.json`, and `styles.css` from the [GitHub release](https://github.com/0xcjl/RecordNote/releases), place them in `.obsidian/plugins/recordnote/` within your vault, restart Obsidian, and enable RecordNote under Community plugins. If upgrading from `voice-organizer-local`, keep the old plugin files until you have verified that settings and recordings are available in RecordNote; disable the old plugin before enabling the new one. The minimum Obsidian version is specified in `manifest.json`. Mobile installation may also use a supported plugin synchronization method.
+Find RecordNote in Obsidian Community Plugins. For manual installation, download `main.js`, `manifest.json`, and `styles.css` from the [GitHub release](https://github.com/0xcjl/RecordNote/releases), place them in `.obsidian/plugins/recordnote/` within your vault, restart Obsidian, and enable RecordNote under Community plugins. If upgrading from `voice-organizer-local`, keep the old plugin files until you have verified that settings and recordings are available in RecordNote; disable the old plugin before enabling the new one. The minimum Obsidian version is specified in `manifest.json`. Mobile installation may also use a supported plugin synchronization method.
 
 ### iPhone Quick Capture example
 
@@ -88,7 +94,7 @@ Obsidian 的 Quick Capture 负责录音；RecordNote 负责后续处理。在 iP
 
 ## 手动安装
 
-RecordNote 的 `recordnote` ID 在社区目录的提交需要审核。也可手动安装：下载 `main.js`、`manifest.json` 和 `styles.css`，放入仓库的 `.obsidian/plugins/recordnote/` 文件夹，重启 Obsidian 后在第三方插件设置中启用 RecordNote。从 `voice-organizer-local` 升级时，先停用旧插件，并保留旧插件文件，直到确认新插件的设置和录音均可正常使用。最低 Obsidian 版本见 `manifest.json`。在移动设备上可通过支持插件同步的方式传递这些插件文件，再按提示重启。
+可在 Obsidian 的第三方插件市场搜索 RecordNote。也可手动安装：下载 `main.js`、`manifest.json` 和 `styles.css`，放入仓库的 `.obsidian/plugins/recordnote/` 文件夹，重启 Obsidian 后在第三方插件设置中启用 RecordNote。从 `voice-organizer-local` 升级时，先停用旧插件，并保留旧插件文件，直到确认新插件的设置和录音均可正常使用。最低 Obsidian 版本见 `manifest.json`。在移动设备上可通过支持插件同步的方式传递这些插件文件，再按提示重启。
 
 ## iPhone 快速录音：应用案例
 
